@@ -218,29 +218,25 @@ footer {
     }
 }
 
-/*Novi stilovi -Josip*/
 
-.form-wrapper{
-    
-    padding: 1.5rem 1rem;
-    border: 1px solid black;
-    border-radius: 8px;
-}
-
-form{
+.filteri {
     display: flex;
-    flex-direction: column;
-    gap: .75rem;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1rem;
 }
 
-.input-wrapper{
-    display: flex;
-    flex-direction: column;
-    gap: .25rem;
-    font-size: 1rem;
+.filteri input,
+.filteri select {
+    min-height: 42px;
+    padding: 8px 10px;
+    border: 1px solid var(--rub);
+    color: var(--tekst);
+    background-color: var(--bijela);
+    font: inherit;
 }
 
-input{
-    padding: .15rem;
-    font-size: 1rem;
+.filteri input {
+    flex: 1 1 220px;
 }
