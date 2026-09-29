@@ -217,3 +217,30 @@ footer {
         gap: 8px;
     }
 }
+
+/*Novi stilovi -Josip*/
+
+.form-wrapper{
+    
+    padding: 1.5rem 1rem;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.input-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    font-size: 1rem;
+}
+
+input{
+    padding: .15rem;
+    font-size: 1rem;
+}
