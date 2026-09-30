@@ -20,7 +20,7 @@ export async function postZadatak(zadatak){
         if(!response.ok)
             throw new Error("Greska prilikom postanja zadatka");
 
-        const data = response.json();
+        const data = await response.json();
         return data;
     }
     catch(err)
@@ -28,5 +28,23 @@ export async function postZadatak(zadatak){
         console.log(err);
     }
     
+}
+
+export async function deleteZadatak(id){
+    try{
+        console.log(`${apiEnpoint}/${id}`);
+        const response = await fetch(`${apiEnpoint}/${id}`, {
+            method : 'DELETE',
+        })
+
+        if(!response.ok)
+            throw new Error("Greška prilikom brisanja zadatka");
+
+        return (await response.json());
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
 }
 

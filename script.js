@@ -1,6 +1,6 @@
 import { Sekcija } from "./components/sekcija.js"
 import { Zadatak } from "./components/zadatak.js"
-import { dohvatiZadatke, postZadatak } from "./services/api-service.js"
+import { dohvatiZadatke, postZadatak, deleteZadatak } from "./services/api-service.js"
 import { createForm } from "./components/form.js"
 
 const main = document.querySelector("#glavni-sadrzaj")
@@ -12,8 +12,8 @@ main.innerHTML = `
     `
 
 
-const zadaciWrapper = document.querySelector("#zadaci")
-let zadaci = []
+const zadaciWrapper = document.querySelector("#zadaci");
+let zadaci = [];
 
 async function dohvatiPrikaziZadatke() {
     zadaciWrapper.textContent = "Ucitavanje zadataka..."
@@ -39,7 +39,7 @@ function prikaziZadatke() {
 
 const form = document.getElementById("upload");
 
-form.addEventListener("submit", e => {
+form.addEventListener("submit", async e => {
     e.preventDefault();
 
     const zadText = document.getElementById("zad").value.trim("");
@@ -54,22 +54,35 @@ form.addEventListener("submit", e => {
             userId : Number(userId),
         };
     
-    async function POST(){
-        try{
-            postZad = await postZadatak(zadObj);
-            if(!postZad)
-            throw new Error("Nije uspješno!!");
-            
-            zadaciWrapper.innerHTML += Zadatak(postZad);
-        }
-        catch{
-            console.log("Nešto je pošlo po zlu")
-        }
-        
-    }
-    POST();
-
-
 
     
-})
+    postZad = await postZadatak(zadObj);
+    if(!postZad)
+    throw new Error("Nije uspješno!!");
+            
+    zadaciWrapper.innerHTML += Zadatak(postZad);
+        
+});
+
+// Delete gumb - Josip
+
+zadaciWrapper.addEventListener("click",async e => {
+    e.preventDefault()
+
+    const gumb = e.target.closest("button");
+    const kartica = e.target.closest(".kartica");
+    let id;
+    
+    if(gumb)
+    {   
+        if(gumb.classList.contains("obrisi-gumb"))
+        {
+            id = gumb.dataset.obrisiId;
+            await deleteZadatak(id);
+            kartica.remove();
+        }
+    }
+    else{
+        return
+    }
+});
